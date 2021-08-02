@@ -1,0 +1,6 @@
+framework module SCDataStatisticsSDK {
+  umbrella header "SCDataStatisticsSDK.h"
+
+  export *
+  module * { export * }
+}
