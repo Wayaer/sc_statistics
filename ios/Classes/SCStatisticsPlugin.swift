@@ -21,7 +21,7 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
         switch call.method {
         case "init":
             let arguments = call.arguments as! [String: Any?]
-            let config = SCDataStatisticsLaunchConfig()
+            let config = SCDataStatisticsLaunchConfig.init()
             config.appVersion = arguments["appVersion"] as! String
             config.areaId = arguments["areaId"] as! String
             config.deviceId = arguments["deviceId"] as! String

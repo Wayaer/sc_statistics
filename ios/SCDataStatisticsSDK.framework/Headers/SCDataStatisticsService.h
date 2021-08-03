@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setupWithConfig:(SCDataStatisticsLaunchConfig *)config;
 
-/*!
+/*! 
  * @abstract 登录日志
  *
  * @param userId 页面名称

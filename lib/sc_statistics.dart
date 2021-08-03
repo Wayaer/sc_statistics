@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -20,7 +22,7 @@ class ScStatistics {
   /// 调用初始化后 会自动调用appStart
   Future<bool> init(InitModel model) async {
     if (!_supportPlatform) return false;
-    print(model.toMap());
+    print(jsonEncode(model.toMap()));
     final bool? state =
         await _channel.invokeMethod<bool?>('init', model.toMap());
     return state ?? false;
