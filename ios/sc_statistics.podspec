@@ -17,8 +17,8 @@ A new Flutter project.
   s.source_files = 'Classes/**/*'
   s.dependency 'AFNetworking'
   s.dependency 'Flutter'
-  s.vendored_frameworks =  'SCDataStatisticsSDK.framework'
-  s.platform = :ios, '11.0'
+  s.frameworks =  'SCDataStatisticsSDK'
+  s.platform = :ios, '10.0'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
 end

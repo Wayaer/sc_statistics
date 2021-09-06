@@ -3,18 +3,15 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-class ScStatistics {
-  factory ScStatistics() => _getInstance();
-
-  ScStatistics._internal();
-
-  static ScStatistics get instance => _getInstance();
-  static ScStatistics? _instance;
-
-  static ScStatistics _getInstance() {
-    _instance ??= ScStatistics._internal();
-    return _instance!;
+class SCStatistics {
+  factory SCStatistics() {
+    _singleton ??= SCStatistics._();
+    return _singleton!;
   }
+
+  SCStatistics._();
+
+  static SCStatistics? _singleton;
 
   final MethodChannel _channel = const MethodChannel('sc_statistics');
 
