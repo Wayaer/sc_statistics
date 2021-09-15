@@ -1,1 +1,2 @@
 rootProject.name = 'sc_statistics'
+include ':scstatistics'

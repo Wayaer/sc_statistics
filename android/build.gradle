@@ -6,9 +6,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        flatDir {
-            dirs 'libs'
-        }
     }
 
     dependencies {
@@ -40,9 +37,7 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'])
-//    implementation files('libs/statisticssdk.aar')
-//    implementation (name: 'statisticssdk', ext: 'aar')
+    implementation project(path: ':scstatistics')
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'

@@ -2,7 +2,6 @@ package fl.sc.statistics
 
 import androidx.annotation.NonNull
 import com.example.sdk.statisticssdk.StatisticsMainInit
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -13,11 +12,15 @@ class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "sc_statistics")
+        channel =
+            MethodChannel(flutterPluginBinding.binaryMessenger, "sc_statistics")
         channel.setMethodCallHandler(this)
     }
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    override fun onMethodCall(
+        @NonNull call: MethodCall,
+        @NonNull result: Result
+    ) {
         when (call.method) {
             "init" -> {
                 StatisticsMainInit.SDKInit(
@@ -27,7 +30,12 @@ class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
                     call.argument("ip"),
                     call.argument("netType")
                 )
-                result.success(StatisticsMainInit.appStart(call.argument("channelName"), call.argument("address")))
+                result.success(
+                    StatisticsMainInit.appStart(
+                        call.argument("channelName"),
+                        call.argument("address")
+                    )
+                )
             }
             "appStop" -> result.success(StatisticsMainInit.appStop())
             "appLogin" -> result.success(StatisticsMainInit.appLogin(call.arguments as String))
