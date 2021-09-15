@@ -4,8 +4,7 @@
 
 ### Android 配置项
 
-复制 `example/android/scstatistics` 目录至 `your project/android/` 目录下，
-并在 `your project/android/settings.gradle` 中添加 `include ':scstatistics'`
+复制 `example/android/scstatistics` 目录至 `your project/android/` 目录下，并在 `your project/android/settings.gradle` 中添加 `include ':scstatistics'`
 
 ```groovy
 
