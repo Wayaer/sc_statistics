@@ -3,7 +3,7 @@ import SCDataStatisticsSDK
 import UIKit
 
 public class SCStatisticsPlugin: NSObject, FlutterPlugin {
-    var channel: FlutterMethodChannel?
+    var channel: FlutterMethodChannel
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "sc_statistics", binaryMessenger: registrar.messenger())
@@ -17,11 +17,10 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        print(call.arguments as Any)
         switch call.method {
         case "init":
-            let arguments = call.arguments as! [String: Any?]
-            let config = SCDataStatisticsLaunchConfig.init()
+            let arguments = call.arguments as! [String: Any]
+            let config = SCDataStatisticsLaunchConfig()
             config.appVersion = arguments["appVersion"] as! String
             config.areaId = arguments["areaId"] as! String
             config.deviceId = arguments["deviceId"] as! String
@@ -123,6 +122,6 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
     }
 
     public func detachFromEngine(for registrar: FlutterPluginRegistrar) {
-        channel?.setMethodCallHandler(nil)
+        channel.setMethodCallHandler(nil)
     }
 }

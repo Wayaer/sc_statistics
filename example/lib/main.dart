@@ -38,15 +38,15 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(width: double.infinity, height: 15),
           ElevatedText(
               onPressed: () async {
-                final InitModel model = InitModel(
+                final InitializeOptions model = InitializeOptions(
                     appVersion: '1.0.0',
                     areaId: '0100',
                     deviceId: '41fa37dd389a58c213d061db63b749a4ce9ca8f2',
                     ip: '1.1.1.1.1',
                     netType: NetType.wifi,
                     location: '成都市|武侯区');
-                final bool data = await SCStatistics().init(model);
-                text = 'init: $data';
+                final bool data = await SCStatistics().initialize(model);
+                text = 'initialize: $data';
                 setState(() {});
               },
               text: '初始化'),

@@ -1,13 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class SCStatistics {
-  factory SCStatistics() {
-    _singleton ??= SCStatistics._();
-    return _singleton!;
-  }
+  factory SCStatistics() => _singleton ??= SCStatistics._();
 
   SCStatistics._();
 
@@ -15,26 +10,28 @@ class SCStatistics {
 
   final MethodChannel _channel = const MethodChannel('sc_statistics');
 
+  bool isInitialize = false;
+
   /// app 启动后初始化调用
   /// 调用初始化后 会自动调用appStart
-  Future<bool> init(InitModel model) async {
-    if (!_supportPlatform) return false;
-    print(jsonEncode(model.toMap()));
+  Future<bool> initialize(InitializeOptions options) async {
+    if (!_supportPlatform && isInitialize) return false;
     final bool? state =
-        await _channel.invokeMethod<bool?>('init', model.toMap());
+        await _channel.invokeMethod<bool?>('init', options.toMap());
+    if (state == true) isInitialize = state!;
     return state ?? false;
   }
 
   /// app登录
   Future<bool> appLogin(String userId) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>('appLogin', userId);
     return state ?? false;
   }
 
   /// app退出
   Future<bool> appStop() async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>('appStop');
     return state ?? false;
   }
@@ -46,13 +43,13 @@ class SCStatistics {
     PageAction action, {
     String? sourceTag,
   }) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final Map<String, dynamic> map = sourceModel.toMap();
     final bool? state = await _channel.invokeMethod<bool>(
         'pageAction',
         map.addAllT(<String, dynamic>{
           'action': (PageAction.values.indexOf(action)).toString(),
-          'sourceTag': sourceTag ?? '',
+          'sourceTag': sourceTag ?? ''
         }));
     return state ?? false;
   }
@@ -60,7 +57,7 @@ class SCStatistics {
   /// 收藏
   /// [type] 收藏类型
   Future<bool> collect(SourceModel sourceModel, CollectType type) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'collect',
         sourceModel.toMap().addAllT(
@@ -71,7 +68,7 @@ class SCStatistics {
   /// 评论
   /// [content] 评论内容
   Future<bool> comment(SourceModel sourceModel, String content) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>('comment',
         sourceModel.toMap().addAllT(<String, dynamic>{'content': content}));
     return state ?? false;
@@ -80,7 +77,7 @@ class SCStatistics {
   /// 分享
   /// [shareType] 分享类型
   Future<bool> share(SourceModel sourceModel, ShareType shareType) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'share',
         sourceModel.toMap().addAllT(<String, dynamic>{
@@ -92,7 +89,7 @@ class SCStatistics {
   /// 点赞
   /// [star] 是否点赞
   Future<bool> thumbsUp(SourceModel sourceModel, bool isLike) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'thumbsUp',
         sourceModel
@@ -104,7 +101,7 @@ class SCStatistics {
   /// 搜索
   /// [content] 搜索内容
   Future<bool> search(String userId, String content) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'search', <String, dynamic>{'userId': userId, 'content': content});
     return state ?? false;
@@ -115,7 +112,7 @@ class SCStatistics {
   /// [isComplete] 是否播放完
   Future<bool> newsPlay(
       SourceModel sourceModel, int contentLength, bool isComplete) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'newsPlay',
         sourceModel.toMap().addAllT(<String, dynamic>{
@@ -128,7 +125,7 @@ class SCStatistics {
   /// 活动直播 播放心跳
   /// [heartbeatLength] 心跳时间，第一次开启直播统计直播事件时心跳值为0，之后每次调用值为60；即每隔60秒上传一次直播日志
   Future<bool> livePlay(SourceModel sourceModel, int heartbeatLength) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'livePlay',
         sourceModel
@@ -141,16 +138,16 @@ class SCStatistics {
   /// [sourceName] 爆料内容详情
   /// [sourceId] 发表内容id
   Future<bool> report(SourceModel sourceModel) async {
-    if (!_supportPlatform) return false;
+    if (!_supportPlatform && !isInitialize) return false;
     final bool? state =
-        await _channel.invokeMethod<bool>('livePlay', sourceModel.toMap());
+        await _channel.invokeMethod<bool>('report', sourceModel.toMap());
     return state ?? false;
   }
 
   /// 电视频道播放
   /// [heartbeatLength] 心跳时间，第一次开启直播统计直播事件时心跳值为0，之后每次调用值为60；即每隔60秒上传一次直播日志
   Future<bool> tvPlay(SourceModel sourceModel, int heartbeatLength) async {
-    if (!_isAndroid) return false;
+    if (!_isAndroid && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'tvPlay',
         sourceModel
@@ -229,8 +226,8 @@ class SourceModel {
       };
 }
 
-class InitModel {
-  InitModel({
+class InitializeOptions {
+  InitializeOptions({
     required this.appVersion,
     required this.areaId,
     required this.deviceId,
@@ -262,7 +259,7 @@ class InitModel {
         'deviceId': deviceId,
         'appVersion': appVersion,
         'ip': ip,
-        'netType': (NetType.values.indexOf(netType) + 1).toString(),
+        'netType': (netType.index + 1).toString(),
         'location': location,
       };
 }

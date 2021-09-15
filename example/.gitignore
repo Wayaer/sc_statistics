@@ -9,7 +9,7 @@
 .history
 .svn/
 .metadata
-
+.dart_tool
 # IntelliJ related
 *.iml
 *.ipr
