@@ -25,11 +25,6 @@ class _HomePageState extends State<HomePage> {
       SourceModel(userId: '1000000', sourceId: '1111111', sourceName: '标题或内容');
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
