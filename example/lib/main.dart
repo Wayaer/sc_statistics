@@ -6,15 +6,14 @@ void main() {
     debugShowCheckedModeBanner: false,
     home: Scaffold(
         appBar: AppBar(title: const Text('四川省平台信息集成模块')),
-        body: SingleChildScrollView(
-            child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: HomePage(),
-        ))),
+        body: const SingleChildScrollView(
+            child: Padding(padding: EdgeInsets.all(15.0), child: HomePage()))),
   ));
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
