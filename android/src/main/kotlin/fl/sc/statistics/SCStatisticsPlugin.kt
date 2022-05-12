@@ -32,7 +32,7 @@ class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
                 )
                 result.success(
                     StatisticsMainInit.appStart(
-                        call.argument("channelName"),
+                        call.argument("channel"),
                         call.argument("address")
                     )
                 )

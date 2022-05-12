@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () async {
                       final bool data =
                           await SCStatistics().share(sourceModel, ShareType.wx);
-                      text = 'comment: $data';
+                      text = 'share: $data';
                       setState(() {});
                     },
                     text: 'share'),

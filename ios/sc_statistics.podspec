@@ -21,7 +21,6 @@ A new Flutter project.
   s.ios.vendored_frameworks = 'Frameworks/SCDataStatisticsSDK.framework'
   s.vendored_frameworks = 'SCDataStatisticsSDK.framework'
   s.platform = :ios, '10.0'
-
   s.swift_version = '5.0'
   s.static_framework = true
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }

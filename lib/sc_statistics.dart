@@ -234,8 +234,10 @@ class InitializeOptions {
     required this.ip,
     required this.netType,
     required this.location,
+    this.channel = '',
   });
 
+  ////  SDKInit
   /// 区域id
   late String areaId;
 
@@ -251,8 +253,12 @@ class InitializeOptions {
   /// 当前网络类型
   late NetType netType;
 
+  //// appStart
   /// 当前登录位置
   late String location;
+
+  /// 渠道名 仅android 使用
+  late String channel;
 
   Map<String, String> toMap() => <String, String>{
         'areaId': areaId,
@@ -261,6 +267,7 @@ class InitializeOptions {
         'ip': ip,
         'netType': (netType.index + 1).toString(),
         'location': location,
+        'channel': channel,
       };
 }
 
