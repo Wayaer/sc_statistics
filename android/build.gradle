@@ -1,5 +1,5 @@
-group 'fl.sc.statistics'
-version '1.0-SNAPSHOT'
+group 'sc.statistics'
+version '1.0'
 
 buildscript {
     ext.kotlin_version = '1.7.0'

@@ -1,6 +1,5 @@
-package fl.sc.statistics
+package sc.statistics
 
-import androidx.annotation.NonNull
 import com.example.sdk.statisticssdk.StatisticsMainInit
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -11,16 +10,12 @@ import io.flutter.plugin.common.MethodChannel.Result
 class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
 
-    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel =
-            MethodChannel(flutterPluginBinding.binaryMessenger, "sc_statistics")
+    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "sc_statistics")
         channel.setMethodCallHandler(this)
     }
 
-    override fun onMethodCall(
-        @NonNull call: MethodCall,
-        @NonNull result: Result
-    ) {
+    override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
             "init" -> {
                 StatisticsMainInit.SDKInit(
@@ -32,8 +27,7 @@ class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
                 )
                 result.success(
                     StatisticsMainInit.appStart(
-                        call.argument("channel"),
-                        call.argument("address")
+                        call.argument("channel"), call.argument("address")
                     )
                 )
             }
@@ -142,7 +136,7 @@ class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
         }
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
     }
 }
