@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fl.sc.statistics.example">
+    package="com.sc.statistics.example">
 
     <application
         android:allowBackup="false"
