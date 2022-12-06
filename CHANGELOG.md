@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Fixed data passing type issues
+
 ## 0.1.0
 
 * Upgrade Flutter@3.0.0

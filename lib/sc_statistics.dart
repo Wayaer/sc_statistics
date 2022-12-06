@@ -47,10 +47,8 @@ class SCStatistics {
     final Map<String, dynamic> map = sourceModel.toMap();
     final bool? state = await _channel.invokeMethod<bool>(
         'pageAction',
-        map.addAllT(<String, dynamic>{
-          'action': (PageAction.values.indexOf(action)).toString(),
-          'sourceTag': sourceTag ?? ''
-        }));
+        map.addAllT(
+            {'action': action.index.toString(), 'sourceTag': sourceTag ?? ''}));
     return state ?? false;
   }
 
@@ -59,9 +57,7 @@ class SCStatistics {
   Future<bool> collect(SourceModel sourceModel, CollectType type) async {
     if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
-        'collect',
-        sourceModel.toMap().addAllT(
-            <String, dynamic>{'type': CollectType.values.indexOf(type)}));
+        'collect', sourceModel.toMap().addAllT({'type': type.index}));
     return state ?? false;
   }
 
@@ -69,8 +65,8 @@ class SCStatistics {
   /// [content] 评论内容
   Future<bool> comment(SourceModel sourceModel, String content) async {
     if (!_supportPlatform && !isInitialize) return false;
-    final bool? state = await _channel.invokeMethod<bool>('comment',
-        sourceModel.toMap().addAllT(<String, dynamic>{'content': content}));
+    final bool? state = await _channel.invokeMethod<bool>(
+        'comment', sourceModel.toMap().addAllT({'content': content}));
     return state ?? false;
   }
 
@@ -79,10 +75,7 @@ class SCStatistics {
   Future<bool> share(SourceModel sourceModel, ShareType shareType) async {
     if (!_supportPlatform && !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
-        'share',
-        sourceModel.toMap().addAllT(<String, dynamic>{
-          'shareType': ShareType.values.indexOf(shareType)
-        }));
+        'share', sourceModel.toMap().addAllT({'shareType': shareType.index}));
     return state ?? false;
   }
 
@@ -126,11 +119,8 @@ class SCStatistics {
   /// [heartbeatLength] 心跳时间，第一次开启直播统计直播事件时心跳值为0，之后每次调用值为60；即每隔60秒上传一次直播日志
   Future<bool> livePlay(SourceModel sourceModel, int heartbeatLength) async {
     if (!_supportPlatform && !isInitialize) return false;
-    final bool? state = await _channel.invokeMethod<bool>(
-        'livePlay',
-        sourceModel
-            .toMap()
-            .addAllT(<String, dynamic>{'heartbeatLength': heartbeatLength}));
+    final bool? state = await _channel.invokeMethod<bool>('livePlay',
+        sourceModel.toMap().addAllT({'heartbeatLength': heartbeatLength}));
     return state ?? false;
   }
 

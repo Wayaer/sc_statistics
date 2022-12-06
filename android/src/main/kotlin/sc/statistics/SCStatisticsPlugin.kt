@@ -50,7 +50,7 @@ class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
                         call.argument("userId"),
                         call.argument("sourceId"),
                         call.argument("sourceName"),
-                        call.argument("type")
+                        call.argument<Int>("type").toString()
                     )
                 )
             }
