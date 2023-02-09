@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   sc_statistics:
     path: ../
-  flutter_curiosity: ^4.0.1
+  flutter_curiosity: ^4.2.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1

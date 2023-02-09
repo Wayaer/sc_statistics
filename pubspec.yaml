@@ -1,6 +1,6 @@
 name: sc_statistics
 description: Sichuan Province platform information integration module for flutter
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/Wayaer/sc_statistics.git
 
 environment:
