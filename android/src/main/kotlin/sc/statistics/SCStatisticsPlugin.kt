@@ -13,7 +13,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
     private lateinit var context: Context
-    private var tracker: Tracker = Tracker.getInstance()
+
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "sc_statistics")
@@ -57,7 +57,7 @@ class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
                 user.createTime = call.argument<String>("createTime")!!
                 user.age = call.argument<Int>("age")!!
                 user.sex = call.argument<Int>("sex")!!
-                tracker.user = user
+                Tracker.getInstance().user = user
                 result.success(true)
             }
             "appStart" -> result.success(Statistics2MainInit.appStart(call.arguments as String))
@@ -94,7 +94,7 @@ class SCStatisticsPlugin : FlutterPlugin, MethodCallHandler {
                     call.argument("timeLength")!!,
                     call.argument("operateType")!!,
                     if (call.argument<Boolean>("isHome")!!) 1 else 0,
-                    call.argument("action"),
+                    call.argument<Int>("action").toString(),
                     call.argument<Int>("sourceType").toString(),
                     call.argument("sourcePage"),
                     call.argument("channelId"),

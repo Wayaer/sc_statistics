@@ -4,8 +4,6 @@ import 'package:sc_statistics/sc_statistics.dart';
 
 bool get _isAndroid => defaultTargetPlatform == TargetPlatform.android;
 
-bool get _isIOS => defaultTargetPlatform == TargetPlatform.iOS;
-
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -27,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   String text = '未初始化';
   SCSourceModel source =
       SCSourceModel(userId: '100', sourceId: '1111111', sourceName: '标题');
-  String appId = 'BED4765794421B7A6B623637F3881381';
+  String appId = 'your appId';
 
   @override
   Widget build(BuildContext context) {
@@ -123,10 +121,10 @@ class _HomePageState extends State<HomePage> {
                     summary: 'summary',
                     sourceTag: 'sourceTag',
                   ));
-                  text = 'pageAction - end: $data';
+                  text = 'accessSource: $data';
                   setState(() {});
                 },
-                text: 'pageAction - end'),
+                text: 'accessSource'),
             ElevatedText(
                 onPressed: () async {
                   final bool data =
@@ -225,16 +223,6 @@ class _HomePageState extends State<HomePage> {
                     setState(() {});
                   },
                   text: 'tvPlay'),
-            if (_isIOS)
-              ElevatedText(
-                  onPressed: () async {
-                    final bool data = await SCStatistics().appTerminate(
-                        timeLength: 1000,
-                        startTime: DateTime.now().millisecondsSinceEpoch);
-                    text = 'appTerminate: $data';
-                    setState(() {});
-                  },
-                  text: 'appTerminate'),
           ])
     ]);
   }

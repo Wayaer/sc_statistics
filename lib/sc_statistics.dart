@@ -33,7 +33,8 @@ class SCStatistics {
   /// 设置用户信息
   Future<bool> setUser(SCUserInfoModel user) async {
     if (!_supportPlatform && !isInitialize) return false;
-    final bool? state = await _channel.invokeMethod<bool>('setUser', user);
+    final bool? state =
+        await _channel.invokeMethod<bool>('setUser', user.toMap());
     return state ?? false;
   }
 
@@ -197,19 +198,6 @@ class SCStatistics {
         'tvPlay',
         source.toMap().addAllT(
             {'heartbeatLength': heartbeatLength, 'liveType': liveType.index}));
-    return state ?? false;
-  }
-
-  /// app退出 仅支持ios
-  /// [timeLength] 访问时长
-  /// [startTime] 启动时间，时间戳，单位秒
-  Future<bool> appTerminate({
-    required int timeLength,
-    required int startTime,
-  }) async {
-    if (!_isIOS && !isInitialize) return false;
-    final bool? state = await _channel.invokeMethod<bool>(
-        'appTerminate', {'timeLength': timeLength, 'startTime': startTime});
     return state ?? false;
   }
 }

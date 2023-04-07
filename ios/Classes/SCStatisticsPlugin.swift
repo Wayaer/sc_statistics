@@ -1,6 +1,6 @@
-import Flutter
-import FCMobStat
 import FCDataStatisticsSDK
+import FCMobStat
+import Flutter
 import UIKit
 
 public class SCStatisticsPlugin: NSObject, FlutterPlugin {
@@ -21,23 +21,27 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
         switch call.method {
         case "setup":
             let args = call.arguments as! [String: Any]
-            let mobTracker = FCMobTracker.default();
+            let mobTracker = FCMobTracker.default()
             let gaodeApiKey = args["gaodeApiKey"] as! String?
-            if (gaodeApiKey != nil) {
+            if gaodeApiKey != nil {
                 mobTracker.gaodeApiKey = gaodeApiKey!
             }
             mobTracker.enableGps = gaodeApiKey != nil
             mobTracker.enableLog = args["enableLog"] as! Bool
             mobTracker.device_uuid = args["deviceId"] as! String
-            /// 直接打开、push唤醒、app调起，默认为直接打开
             mobTracker.start_type = args["startType"] as! String
             FCMobTracker.start(withAppId: args["appId"] as! String)
             let config = FCDataStatisticsLaunchConfig()
-            config.appVersion = args["appVersion"] as! String
+            let appVersion = args["appVersion"] as! String
+            config.appVersion = appVersion
+            mobTracker.app_version = appVersion
+            let channel = args["channel"] as! String
+            config.channelName = channel
+            mobTracker.app_channel = channel
             config.areaId = args["areaId"] as! String
             config.netType = (args["netType"] as! String) == "1" ? "WiFi" : "移动网络"
-            config.channelName = args["channel"] as! String
             FCDataStatisticsService.shareInstance().setup(with: config)
+            FCDataStatisticsService.shareInstance().setDebug(mobTracker.enableLog)
             result(true)
         case "setNetType":
             FCDataStatisticsService.shareInstance().reSetNetType(call.arguments as! String)
@@ -57,8 +61,8 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
             user.head_pic = args["headPic"] as! String
             user.other = args["other"] as! String
             user.tag = args["tag"] as! String
-            user.sex = Int32(args["sex"] as! Int)
-            user.age = Int32(args["age"] as! Int)
+            user.sex = (args["sex"] as! NSNumber).int32Value
+            user.age = (args["age"] as! NSNumber).int32Value
             FCMobTracker.setUserModel(user)
             result(true)
         case "appStart":
@@ -67,8 +71,8 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
         case "appStop":
             let args = call.arguments as! [String: Any]
             let event = FCDataStatisticsAppTerminateEvent()
-            event.startTime = Int32(args["startTime"] as! Int)
-            event.timeLength = Int32(args["timeLength"] as! Int)
+            event.startTime = (args["startTime"] as! NSNumber).int32Value
+            event.timeLength = (args["timeLength"] as! NSNumber).int32Value
             FCDataStatisticsService.shareInstance().addEventLog(event)
             result(true)
         case "login":
@@ -175,13 +179,6 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
             config.userId = args["userId"] as! String
             config.contentLength = args["contentLength"] as! Int
             config.isComplete = args["isComplete"] as! Bool
-            FCDataStatisticsService.shareInstance().addEventLog(config)
-            result(true)
-        case "appTerminate":
-            let args = call.arguments as! [String: Any?]
-            let config = FCDataStatisticsAppTerminateEvent()
-            config.timeLength = Int32(args["timeLength"] as! Int)
-            config.startTime = Int32(args["startTime"] as! Int)
             FCDataStatisticsService.shareInstance().addEventLog(config)
             result(true)
         case "report":
