@@ -1,3 +1,7 @@
+## 1.0.0
+
+* version updating
+
 ## 0.1.2
 
 * Fixed data passing type issues

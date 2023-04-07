@@ -6,4 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application>
+        <meta-data
+            android:name="fc_auto_tracker_app_id"
+            android:value="你的appid" />
+    </application>
+
 </manifest>

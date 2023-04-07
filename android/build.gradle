@@ -4,20 +4,39 @@ version '1.0'
 buildscript {
     ext.kotlin_version = '1.7.0'
     repositories {
+        maven {
+            credentials {
+                username '607934ec8e4139b4d7bd6c21'
+                password 'B866KYvfPlGT'
+            }
+            url "https://packages.aliyun.com/maven/repository/2096235-release-Fus31H"
+        }
         google()
         mavenCentral()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.tenma.ventures:track2-gradle-plugin:1.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 rootProject.allprojects {
     repositories {
-        google()
+        maven {
+            credentials {
+                username '607934ec8e4139b4d7bd6c21'
+                password 'B866KYvfPlGT'
+            }
+            url "https://packages.aliyun.com/maven/repository/2096235-release-Fus31H"
+        }
+        maven {
+            allowInsecureProtocol = true
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
         mavenCentral()
+        google()
     }
 }
 
@@ -37,11 +56,5 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation project(path: ':scstatistics')
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
-    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.tenma.ventures:track2:1.4.5-sc9'
 }

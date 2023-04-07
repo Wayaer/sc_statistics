@@ -15,11 +15,8 @@ A new Flutter project.
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
-  s.dependency 'AFNetworking'
   s.dependency 'Flutter'
-
-  s.ios.vendored_frameworks = 'Frameworks/SCDataStatisticsSDK.framework'
-  s.vendored_frameworks = 'SCDataStatisticsSDK.framework'
+  s.dependency 'FCMobTracker_sc'
   s.platform = :ios, '10.0'
   s.swift_version = '5.0'
   s.static_framework = true
