@@ -22,7 +22,7 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
         case "setup":
             let args = call.arguments as! [String: Any]
             let mobTracker = FCMobTracker.default()
-            let gaodeApiKey = args["gaodeApiKey"] as! String?
+            let gaodeApiKey = args["gaodeApiKey"] as? String
             if gaodeApiKey != nil {
                 mobTracker.gaodeApiKey = gaodeApiKey!
             }
@@ -92,9 +92,18 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
             config.channelId = args["channelId"] as! String
             config.sourceType = Int32(args["sourceType"] as! Int)
             config.timeLength = Int32(args["timeLength"] as! Int)
-            config.offtime = args["offTime"] as! String
-            config.path = args["path"] as! String
-            config.summary = args["summary"] as! String
+            let offTime = args["offTime"] as? String
+            if offTime != nil {
+                config.offtime = offTime!
+            }
+            let path = args["path"] as? String
+            if path != nil {
+                config.path = path!
+            }
+            let summary = args["summary"] as? String
+            if summary != nil {
+                config.summary = summary!
+            }
             FCDataStatisticsService.shareInstance().addEventLog(config)
             result(true)
         case "accessPage":

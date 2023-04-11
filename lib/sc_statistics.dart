@@ -585,7 +585,7 @@ class SCInitialOptions {
     required this.deviceId,
     required this.netType,
     this.channel = '',
-    this.gaodeApiKey = '',
+    this.gaodeApiKey,
     this.enableLog = true,
     this.startType = '直接打开',
   });
@@ -611,7 +611,7 @@ class SCInitialOptions {
   final String deviceId;
 
   /// 高德 apiKey
-  final String gaodeApiKey;
+  final String? gaodeApiKey;
 
   /// 是否开始日志
   final bool enableLog;

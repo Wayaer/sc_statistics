@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Fixed a bug on ios
+
 ## 1.0.0
 
 * version updating
