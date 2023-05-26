@@ -14,7 +14,7 @@ class SCStatistics {
 
   /// app 启动后初始化调用
   Future<bool> setup(SCInitialOptions options) async {
-    if (!_supportPlatform && isInitialize) return false;
+    if (!_supportPlatform || isInitialize) return false;
     final bool? state =
         await _channel.invokeMethod<bool?>('setup', options.toMap());
     if (state == true) isInitialize = state!;
@@ -24,7 +24,7 @@ class SCStatistics {
   /// 设置网络状态
   /// [netType] 2G、3G、4G、5G、WiFi
   Future<bool> setNetType(String netType) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state =
         await _channel.invokeMethod<bool>('setNetType', netType);
     return state ?? false;
@@ -32,7 +32,7 @@ class SCStatistics {
 
   /// 设置用户信息
   Future<bool> setUser(SCUserInfoModel user) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state =
         await _channel.invokeMethod<bool>('setUser', user.toMap());
     return state ?? false;
@@ -41,7 +41,7 @@ class SCStatistics {
   /// app启动
   /// [channel] – 渠道名称 ： huawei、baidu、xiaomi  ios 等
   Future<bool> appStart(String channel) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>('appStart', channel);
     return state ?? false;
   }
@@ -50,7 +50,7 @@ class SCStatistics {
   /// [startTime] 启动时间,时间戳 单位秒
   /// [timeLength] 访问时长
   Future<bool> appStop(int startTime, int timeLength) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'appStop', {'startTime': startTime, 'timeLength': timeLength});
     return state ?? false;
@@ -60,7 +60,7 @@ class SCStatistics {
   /// [userId] 用户名（也可以是手机号）
   /// [operateType] // 1登录,2退出
   Future<bool> login(String userId, LoginType operateType) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'login', {'userId': userId, 'operateType': operateType.index + 1});
     return state ?? false;
@@ -69,7 +69,7 @@ class SCStatistics {
   /// 资源访问
   /// [action] 页面动作
   Future<bool> accessSource(SCAccessSourceModel model) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state =
         await _channel.invokeMethod<bool>('accessSource', model.toMap());
     return state ?? false;
@@ -78,7 +78,7 @@ class SCStatistics {
   /// 进入或退出页面
   /// [action] 页面动作
   Future<bool> accessPage(SCAccessPageModel model) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state =
         await _channel.invokeMethod<bool>('accessPage', model.toMap());
     return state ?? false;
@@ -91,7 +91,7 @@ class SCStatistics {
     required SourceType sourceType,
     required bool isCollect,
   }) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'collect',
         source.toMap().addAllT(
@@ -106,7 +106,7 @@ class SCStatistics {
     required String content,
     required SourceType sourceType,
   }) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'comment',
         source
@@ -122,7 +122,7 @@ class SCStatistics {
     required ShareType shareType,
     required SourceType sourceType,
   }) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'forward',
         source.toMap().addAllT(
@@ -137,7 +137,7 @@ class SCStatistics {
     required bool isStar,
     required SourceType sourceType,
   }) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'thumbsUp',
         source.toMap().addAllT(
@@ -148,7 +148,7 @@ class SCStatistics {
   /// 活动直播 播放心跳
   /// [heartbeatLength] 心跳时间，第一次开启直播统计直播事件时心跳值为0，之后每次调用值为60；即每隔60秒上传一次直播日志
   Future<bool> livePlay(SCSourceModel source, int heartbeatLength) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>('livePlay',
         source.toMap().addAllT({'heartbeatLength': heartbeatLength}));
     return state ?? false;
@@ -157,7 +157,7 @@ class SCStatistics {
   /// 搜索
   /// [content] 搜索内容
   Future<bool> search(String userId, String content) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel
         .invokeMethod<bool>('search', {'userId': userId, 'content': content});
     return state ?? false;
@@ -170,7 +170,7 @@ class SCStatistics {
       {required SCSourceModel source,
       required int contentLength,
       required bool isComplete}) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'videoPlay',
         source.toMap().addAllT(
@@ -180,7 +180,7 @@ class SCStatistics {
 
   /// 发布爆料
   Future<bool> report(SCReportModel source) async {
-    if (!_supportPlatform && !isInitialize) return false;
+    if (!_supportPlatform || !isInitialize) return false;
     final bool? state =
         await _channel.invokeMethod<bool>('report', source.toMap());
     return state ?? false;
@@ -193,7 +193,7 @@ class SCStatistics {
     required int heartbeatLength,
     required LiveType liveType,
   }) async {
-    if (!_isAndroid && !isInitialize) return false;
+    if (!_isAndroid || !isInitialize) return false;
     final bool? state = await _channel.invokeMethod<bool>(
         'tvPlay',
         source.toMap().addAllT(

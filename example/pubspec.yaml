@@ -4,14 +4,14 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   sc_statistics:
     path: ../
-  flutter_curiosity: ^4.2.0
+  flutter_curiosity: ^4.3.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1
