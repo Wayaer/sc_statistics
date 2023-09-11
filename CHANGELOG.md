@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Removing `deviceId`
+
 ## 1.0.2
 
 * Fixed a bug on ios

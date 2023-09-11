@@ -582,7 +582,6 @@ class SCInitialOptions {
     required this.appId,
     required this.appVersion,
     required this.areaId,
-    required this.deviceId,
     required this.netType,
     this.channel = '',
     this.gaodeApiKey,
@@ -607,9 +606,6 @@ class SCInitialOptions {
 
   /// ***** 以下仅支持 ios ***** ///
 
-  /// 设备唯一标识
-  final String deviceId;
-
   /// 高德 apiKey
   final String? gaodeApiKey;
 
@@ -625,7 +621,6 @@ class SCInitialOptions {
         'appVersion': appVersion,
         'netType': (netType.index + 1).toString(),
         'channel': channel,
-        'deviceId': deviceId,
         'gaodeApiKey': gaodeApiKey,
         'enableLog': enableLog,
         'startType': startType,

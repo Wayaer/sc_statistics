@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
             final SCInitialOptions model = SCInitialOptions(
                 appVersion: '1.0.0',
                 areaId: '0100',
-                deviceId: '41fa37dd389a58c213d061db63b749a4ce9ca8f2',
                 appId: appId,
                 netType: NetType.wifi);
             final bool data = await SCStatistics().setup(model);

@@ -1,4 +1,4 @@
-name: sc_statistics_example
+name: example
 description: Demonstrates how to use the sc_statistics plugin.
 publish_to: 'none'
 version: 1.0.0+1
@@ -11,10 +11,10 @@ dependencies:
     sdk: flutter
   sc_statistics:
     path: ../
-  flutter_curiosity: ^4.3.1
+  flutter_curiosity: ^5.0.0
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.3
 
 flutter:
   uses-material-design: true

@@ -28,7 +28,6 @@ public class SCStatisticsPlugin: NSObject, FlutterPlugin {
             }
             mobTracker.enableGps = gaodeApiKey != nil
             mobTracker.enableLog = args["enableLog"] as! Bool
-            mobTracker.device_uuid = args["deviceId"] as! String
             mobTracker.start_type = args["startType"] as! String
             FCMobTracker.start(withAppId: args["appId"] as! String)
             let config = FCDataStatisticsLaunchConfig()
