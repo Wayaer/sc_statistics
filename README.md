@@ -22,3 +22,26 @@ include ':app'
 include ':scstatistics'
 
 ```
+
+## ios 配置
+添加一下内容到 `ios/Runner/Info.plist`，以解决依赖库里的http请求正常
+
+```plist
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>appmsapiscxrspt.sctvcloud.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSExceptionMinimumTLSVersion</key>
+				<string>TLSv1.2</string>
+			</dict>
+		</dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+```
