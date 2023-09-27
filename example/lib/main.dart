@@ -7,6 +7,8 @@ bool get _isAndroid => defaultTargetPlatform == TargetPlatform.android;
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
+    theme: ThemeData.light(useMaterial3: true),
+    darkTheme: ThemeData.dark(useMaterial3: true),
     home: Scaffold(
         appBar: AppBar(title: const Text('四川省平台信息集成模块')),
         body: const SingleChildScrollView(
