@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Add `namespace` in Android
+
 ## 1.1.0
 
 * Removing `deviceId`

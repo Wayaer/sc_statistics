@@ -46,6 +46,10 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 33
 
+    if (project.android.hasProperty("namespace")) {
+        namespace 'sc.statistics'
+    }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
