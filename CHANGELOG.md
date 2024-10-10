@@ -1,3 +1,7 @@
+## 1.2.0
+
+* Update gradle version
+
 ## 1.1.1
 
 * Add `namespace` in Android
